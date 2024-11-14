@@ -69,7 +69,14 @@ def contactv(request):
         name=request.POST.get('name')
         subject=request.POST.get('sub')
         msg=request.POST.get('message')
-        send_mail(email,name,subject,msg,[email],fail_silently=False)
+        #send_mail(email,name,subject,msg,[email],fail_silently=False)
+        send_mail(
+            subject=subject,
+            message=f"From: {name} <{email}>\n\n{msg}",  # include the sender's email in the message
+            from_email="your_verified_email@example.com",  # Use a verified email for outgoing mail
+            recipient_list=["214g1a3208@srit.ac.in"],
+            fail_silently=False,
+        )
     return render(request,'contact.html')
 
 
